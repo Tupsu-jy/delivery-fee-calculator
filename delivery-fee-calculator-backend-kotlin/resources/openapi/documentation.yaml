@@ -1,8 +1,0 @@
-openapi: "3.0.3"
-info:
-  title: "delivery_fee_calculator_backend_kotlin API"
-  description: "delivery_fee_calculator_backend_kotlin API"
-  version: "1.0.0"
-servers:
-- url: "https://delivery_fee_calculator_backend_kotlin"
-paths: {}

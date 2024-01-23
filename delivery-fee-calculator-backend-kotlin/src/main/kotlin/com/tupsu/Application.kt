@@ -1,6 +1,8 @@
 package com.tupsu
 
-import com.tupsu.plugins.*
+import com.tupsu.models.configureSerialization
+import com.tupsu.routes.configureHTTP
+import com.tupsu.routes.configureDeliveryFeeRoutes
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
@@ -12,5 +14,6 @@ fun main() {
 
 fun Application.module() {
     configureHTTP()
-    configureRouting()
+    configureDeliveryFeeRoutes()
+    configureSerialization()
 }

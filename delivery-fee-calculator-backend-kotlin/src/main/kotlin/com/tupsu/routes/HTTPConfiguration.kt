@@ -1,4 +1,4 @@
-package com.tupsu.plugins
+package com.tupsu.routes
 
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -18,9 +18,9 @@ fun Application.configureHTTP() {
         anyHost() // @TODO: Don't do this in production if possible. Try to limit it.
     }
     routing {
-        openAPI(path = "openapi")
+        openAPI(path="openapi", swaggerFile = "openapi/documentation.yaml")
     }
     routing {
-        swaggerUI(path = "openapi")
+        swaggerUI(path = "swagger", swaggerFile = "openapi/documentation.yaml")
     }
 }

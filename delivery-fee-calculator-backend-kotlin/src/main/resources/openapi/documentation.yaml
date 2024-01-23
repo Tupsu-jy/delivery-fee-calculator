@@ -1,23 +1,49 @@
 openapi: "3.0.3"
 info:
-  title: "Application API"
-  description: "Application API"
+  title: "delivery_fee_calculator_backend_kotlin API"
+  description: "delivery_fee_calculator_backend_kotlin API"
   version: "1.0.0"
 servers:
-  - url: "http://0.0.0.0:8080"
+- url: "https://delivery_fee_calculator_backend_kotlin"
 paths:
-  /:
-    get:
-      description: "Hello World!"
+  /deliveryFee:
+    post:
+      description: ""
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: "#/components/schemas/DeliveryFeeRequest"
+        required: true
       responses:
         "200":
-          description: "OK"
+          description: "OK <br> Send response"
           content:
-            text/plain:
+            '*/*':
               schema:
-                type: "string"
-              examples:
-                Example#1:
-                  value: "Hello World!"
+                $ref: "#/components/schemas/DeliveryFeeResponse"
 components:
   schemas:
+    DeliveryFeeRequest:
+      type: "object"
+      properties:
+        cart_value:
+          type: "integer"
+          format: "int32"
+        delivery_distance:
+          type: "integer"
+          format: "int32"
+        number_of_items:
+          type: "integer"
+          format: "int32"
+        time:
+          type: "string"
+          format: "date-time"
+      required:
+      - "time"
+    DeliveryFeeResponse:
+      type: "object"
+      properties:
+        delivery_fee:
+          type: "integer"
+          format: "int32"
