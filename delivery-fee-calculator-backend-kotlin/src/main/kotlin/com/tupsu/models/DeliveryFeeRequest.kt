@@ -4,6 +4,8 @@ import kotlinx.serialization.encoding.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
+// TODO add validation by having constraints in these models
+
 /**
  * Serializes and deserializes [LocalDateTime] objects to and from ISO 8601 format.
  */
