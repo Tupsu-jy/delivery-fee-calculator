@@ -4,6 +4,7 @@ import os
 
 test_data = None
 
+
 def load_test_data():
     global test_data
 
@@ -28,9 +29,12 @@ def load_test_data():
         # Parse time strings to datetime objects in the test data
         for key in ['calculateDeliveryFee', 'calculateRushHourSurcharge']:
             for test_case in test_data.get(key, []):
-                test_case["time"] = parse_time(test_case["time"])
+                # Parse time and add it as a new key
+                parsed_time = parse_time(test_case["time"])
+                test_case["parsed_time"] = parsed_time
 
     return test_data
+
 
 def parse_time(time_string):
     return datetime.strptime(time_string, "%Y-%m-%dT%H:%M:%SZ")
