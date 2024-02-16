@@ -1,0 +1,20 @@
+[
+  {
+    "description": "Test Case 1: Standard delivery on Monday",
+    "cartValue": "7.90",
+    "deliveryDistance": "2235",
+    "amountOfItems": "4",
+    "deliveryTimeOption": "Later",
+    "selectedDay": "Monday",
+    "expectedFee": "7.10 €"
+  },
+  {
+    "description": "Test Case 2: Rush hour delivery on Friday",
+    "cartValue": "15.00",
+    "deliveryDistance": "1500",
+    "amountOfItems": "2",
+    "deliveryTimeOption": "Express",
+    "selectedDay": "Friday",
+    "expectedFee": "10.00 €"
+  }
+]

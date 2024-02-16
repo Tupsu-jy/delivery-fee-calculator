@@ -1,0 +1,29 @@
+.selectionContainer {
+  position: relative;
+}
+
+.selectionLabel {
+  color: grey;
+  font-size: 11.2px;
+  position: absolute;
+  left: 15px;
+  top: 5px;
+}
+
+.selectDropdown {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px 10px 8px;
+  border: 2px solid var(--light-blue);
+  /* Light blue border */
+  border-radius: var(--corner-roundness);
+  outline: none;
+  font-size: 16px;
+  background: transparent;
+  transition: border 0.3s ease;
+}
+
+.selectDropdown:focus {
+  border: 2px solid var(--dark-blue);
+  /* Darker blue border when focused */
+}

@@ -4,9 +4,13 @@ import kotlinx.serialization.Serializable
 
 /**
  * Represents a response to request for calculating delivery fee.
- * @param delivery_fee The value of the delivery fee in cents.
+ * @param deliveryFee The value of the delivery fee in cents.
  */
 @Serializable
 data class DeliveryFeeResponse(
-    val delivery_fee: Int
-)
+    val deliveryFee: Int
+) {
+    init {
+        require(deliveryFee >= 0) { "Delivery fee must be non-negative" }
+    }
+}

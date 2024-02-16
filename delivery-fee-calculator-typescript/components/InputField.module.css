@@ -1,0 +1,48 @@
+/* InputField.module.css */
+.inputFieldContainer {
+  position: relative;
+  width: 90%;
+}
+
+.inputField {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px 10px 8px;
+  border: 2px solid var(--light-blue);
+  /* Light blue border */
+  border-radius: var(--corner-roundness);
+  outline: none;
+  font-size: 16px;
+  background: transparent;
+  transition: border 0.3s ease;
+}
+
+.inputField:focus {
+  border: 2px solid var(--dark-blue);
+  /* Darker blue border when focused */
+}
+
+.inputFieldError {
+  border: 2px solid var(--error-color);
+}
+
+.inputLabel {
+  color: grey;
+  font-size: 16px;
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.2s ease-in-out;
+  pointer-events: none;
+}
+
+.inputField:focus+.inputLabel {
+  top: 3px;
+  transform: scale(0.7) translateX(-20%);
+}
+
+.inputField:not(:placeholder-shown)+.inputLabel {
+  top: 3px;
+  transform: scale(0.7) translateX(-20%);
+}

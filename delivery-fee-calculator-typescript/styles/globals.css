@@ -1,0 +1,38 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-image: url('../public/background.svg');
+  background-size: cover;
+  /* Cover the entire area of the container */
+  background-position: top center;
+  /* Align the top edge of the image with the top edge of the screen */
+  background-repeat: no-repeat;
+  /* Do not repeat the image */
+  background-attachment: fixed;
+  /* Fix the background image in the viewport */
+}
+
+#__next {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+:root {
+  --blue: #007bff;
+  /* Primary blue color */
+  --light-blue: #caf0f8;
+  /* Light blue color for borders and backgrounds */
+  --dark-blue: #0056b3;
+  /* Dark blue color for focused borders */
+  --grey: #6c757d;
+  /* Grey color for label text */
+  --corner-roundness: 12px;
+  /* Degree of corner roundess */
+  --error-color: #dc3545;
+  /* Red color for error messages */
+}

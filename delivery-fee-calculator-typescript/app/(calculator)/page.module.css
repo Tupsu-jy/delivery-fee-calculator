@@ -1,0 +1,78 @@
+.calculatorContainer {
+  background-color: white;
+  border-radius: var(--corner-roundness);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 95%;
+  max-width: 400px;
+  margin: auto;
+  margin-top: 5%;
+  }
+
+.formContainer {
+  display: flex;
+  /* Set display to flex to use Flexbox */
+  flex-direction: column;
+  /* Align children in a column */
+  align-items: center;
+  /* Center children horizontally */
+  width: 100%;
+  /* Ensure the form takes the full width of the parent */
+  gap: 20px;
+}
+
+.formContainer>*:last-child {
+  margin-bottom: 20px;
+}
+
+.selectionFieldsContainer {
+  display: flex;
+  /* Set display to flex to have children side by side */
+  justify-content: space-between;
+  /* Space out children evenly */
+  width: 90%;
+  /* Full width to match form's width */
+  gap: 15px;
+}
+
+.selectionFieldsContainer>* {
+  flex: 1;
+}
+
+.error {
+  color: var(--error-color);
+  font-size: 0.8rem;
+}
+
+.button {
+  width: 90%;
+  background-color: var(--blue);
+  /* Blue background */
+  color: white;
+  /* White text */
+  border: none;
+  /* No border */
+  border-radius: 20px;
+  /* Rounded corners */
+  padding: 10px 20px;
+  /* Padding around text */
+  font-size: 16px;
+  /* Text size */
+  cursor: pointer;
+  /* Mouse cursor becomes a hand icon */
+  outline: none;
+  /* Remove focus outline */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Slight shadow for depth */
+  transition: background-color 0.2s ease;
+  /* Smooth background color transition */
+}
+
+.button:hover {
+  background-color: var(--dark-blue);
+  /* Darker blue on hover */
+}
+
+.button:active {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  /* Smaller shadow when pressed */
+}

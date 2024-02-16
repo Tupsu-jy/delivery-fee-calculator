@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  frontend:
+    build:
+      context: ./delivery-fee-calculator-typescript
+      dockerfile: Dockerfile.prod
+    image: delivery-fee-calculator-typescript-dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./delivery-fee-calculator-typescript:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+  backend:
+    build:
+      context: ./delivery-fee-calculator-backend-kotlin
+      dockerfile: Dockerfile
+    image: delivery-fee-calculator-backend-kotlin-dev
+    ports:
+      - "8080:8080"
+    environment:
+      - JAVA_OPTS=-Dio.ktor.development=true
+

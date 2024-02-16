@@ -8,10 +8,15 @@ tasks.test {
     useJUnitPlatform()
 }
 
+tasks.dokkaHtml {
+    outputDirectory.set(file("docs"))
+}
+
 plugins {
     kotlin("jvm") version "1.9.22"
     id("io.ktor.plugin") version "2.3.7"
     kotlin("plugin.serialization") version "1.9.22"
+    id("org.jetbrains.dokka") version "1.9.10"
 }
 
 group = "com.tupsu"
@@ -31,6 +36,7 @@ repositories {
 dependencies {
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
     implementation("io.ktor:ktor-server-content-negotiation:$ktor_version")
+    implementation("io.ktor:ktor-server-status-pages:$ktor_version")
     implementation("io.ktor:ktor-server-core-jvm")
     implementation("io.ktor:ktor-server-cors-jvm")
     implementation("io.ktor:ktor-server-openapi")
@@ -39,12 +45,12 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:$logback_version")
     testImplementation("io.ktor:ktor-server-tests-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
-    // Kotestin riippuvuudet
+    // Kotest dependencies
     testImplementation("io.kotest:kotest-runner-junit5:$kotest_version")
     testImplementation("io.kotest:kotest-assertions-core:$kotest_version")
     testImplementation("io.kotest:kotest-framework-engine:$kotest_version")
 
-    // MockK riippuvuus
+    // MockK dependencies
     testImplementation("io.mockk:mockk:$mockk_version")
 
     // Ktor Test Host for testing applications

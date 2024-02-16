@@ -13,19 +13,22 @@ import java.time.LocalDateTime
 class DeliveryFeeRoutesTests : StringSpec({
 
     "should return delivery fee" {
-        val request = DeliveryFeeRequest(
-            cart_value = 1500,
-            delivery_distance = 2000,
-            number_of_items = 5,
-            time = LocalDateTime.parse("2024-01-15T13:00:00")
-        )
-        val expectedResponse = DeliveryFeeResponse(delivery_fee = 2500)
+        val jsonRequestBody = """
+            {
+                "cartValue": 790,
+                "deliveryDistance": 2235,
+                "numberOfItems": 4,
+                "time": "2024-01-15T13:00:00Z"
+            }
+        """.trimIndent()
+
+        val expectedResponse = DeliveryFeeResponse(deliveryFee = 710)
 
         testApplication {
             application { module() }
             val response = client.post("/deliveryFee") {
                 contentType(ContentType.Application.Json)
-                setBody(Json.encodeToString(request))
+                setBody(jsonRequestBody)
             }
             response.status shouldBe HttpStatusCode.OK
             val responseJson = response.bodyAsText()

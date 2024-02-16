@@ -17,13 +17,13 @@ fun Application.configureDeliveryFeeRoutes() {
             val request = call.receive<DeliveryFeeRequest>()
             // Handle request and calculate delivery fee
             val deliveryFee = calculateDeliveryFee(
-                cartValue = request.cart_value,
-                deliveryDistance = request.delivery_distance,
-                numberOfItems = request.number_of_items,
+                cartValue = request.cartValue,
+                deliveryDistance = request.deliveryDistance,
+                numberOfItems = request.numberOfItems,
                 time = request.time
             )
             // Send response
-            call.respond(DeliveryFeeResponse(delivery_fee = deliveryFee))
+            call.respond(DeliveryFeeResponse(deliveryFee = deliveryFee))
         }
     }
 }
