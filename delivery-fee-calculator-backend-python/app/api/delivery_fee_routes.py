@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Request, status
+from fastapi import FastAPI, HTTPException, Request, status, APIRouter
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 from pydantic import ValidationError
@@ -6,25 +6,6 @@ from ..schemas import DeliveryFeeRequest, DeliveryFeeResponse
 from ..delivery_fee_calculator import calculate_delivery_fee
 
 router = APIRouter()
-
-
-@app.exception_handler(RequestValidationError)
-async def validation_exception_handler(request: Request, exc: RequestValidationError):
-    """
-    Handles validation errors. This is a FastAPI-specific exception handler.
-    """
-    return JSONResponse(
-        status_code=status.HTTP_400_BAD_REQUEST,
-        content={"error": exc.errors()},
-    )
-
-
-@app.exception_handler(Exception)
-async def generic_exception_handler(request: Request, exc: Exception):
-    return JSONResponse(
-        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-        content={"error": "An unexpected error occurred"},
-    )
 
 
 @router.post(
@@ -38,7 +19,7 @@ async def calculate_fee_endpoint(request: DeliveryFeeRequest):
     """
     Endpoint to calculate the delivery fee.
 
-    - **cart_value**: The value of the shopping cart in cents.
+    - **cartValue**: The value of the shopping cart in cents.
     - **delivery_distance**: The delivery distance in meters.
     - **number_of_items**: The number of items in the cart.
     - **time**: The time when the order was placed, in ISO 8601 format.
@@ -48,10 +29,10 @@ async def calculate_fee_endpoint(request: DeliveryFeeRequest):
     applying any necessary surcharges based on these parameters.
     """
     fee = calculate_delivery_fee(
-        cart_value=request.cart_value,
-        delivery_distance=request.delivery_distance,
-        number_of_items=request.number_of_items,
+        cart_value=request.cartValue,
+        delivery_distance=request.deliveryDistance,
+        number_of_items=request.numberOfItems,
         time=request.time
     )
 
-    return DeliveryFeeResponse(delivery_fee=fee)
+    return DeliveryFeeResponse(deliveryFee=fee)

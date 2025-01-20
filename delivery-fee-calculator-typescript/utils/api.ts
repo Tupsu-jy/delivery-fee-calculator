@@ -16,7 +16,7 @@ export const calculateDeliveryFeeKotlin = async (data: DeliveryFeeRequestData): 
 };
 
 export const calculateDeliveryFeePython = async (data: DeliveryFeeRequestData): Promise<DeliveryFeeResponseData> => {
-  const response = await fetch('http://localhost:8000/deliveryFee', {
+  const response = await fetch('http://localhost:8000/delivery-fee', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),

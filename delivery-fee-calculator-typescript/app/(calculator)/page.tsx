@@ -11,7 +11,10 @@ import {
   transformCalculatorInputToDeliveryFeeRequestData,
 } from '@/utils/functions'
 import { validateDeliveryFeeRequestData } from '@/types/models'
-import { calculateDeliveryFeeKotlin } from '@/utils/api'
+import {
+  calculateDeliveryFeeKotlin,
+  calculateDeliveryFeePython,
+} from '@/utils/api'
 import styles from './page.module.css'
 
 const timesInDay: string[] = []
@@ -103,7 +106,7 @@ const CalculatorForm = () => {
     }
 
     try {
-      const result = await calculateDeliveryFeeKotlin(requestData)
+      const result = await calculateDeliveryFeePython(requestData)
       let deliveryFeeInEuros = (result.deliveryFee / 100).toFixed(2)
       setDeliveryFee(deliveryFeeInEuros)
     } catch (err) {
