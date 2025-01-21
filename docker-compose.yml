@@ -3,7 +3,7 @@ services:
   frontend:
     build:
       context: ./delivery-fee-calculator-typescript
-      dockerfile: Dockerfile.prod
+      dockerfile: Dockerfile.dev
     image: delivery-fee-calculator-typescript-dev
     ports:
       - "3000:3000"
@@ -12,7 +12,8 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=development
-  backend:
+
+  backend-kotlin:
     build:
       context: ./delivery-fee-calculator-backend-kotlin
       dockerfile: Dockerfile
@@ -21,4 +22,16 @@ services:
       - "8080:8080"
     environment:
       - JAVA_OPTS=-Dio.ktor.development=true
+
+  backend-python:
+    build:
+      context: ./delivery-fee-calculator-backend-python
+      dockerfile: Dockerfile
+    image: delivery-fee-calculator-backend-python-dev
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./delivery-fee-calculator-backend-python:/app
+    environment:
+      - UVICORN_RELOAD=true
 

@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import InputField from '@/components/InputField'
 import SlidingRadioButton from '@/components/SlidingRadioButton'
 import SelectionField from '@/components/SelectionField'
-import { Weekday, DeliveryTimeOption } from '@/types/enums'
+import { Weekday, DeliveryTimeOption, CodeLanguage } from '@/types/enums'
 import {
   getISOFormattedDeliveryTime,
   getWeekdaysExcludingTodayAndTomorrow,
@@ -14,6 +14,7 @@ import { validateDeliveryFeeRequestData } from '@/types/models'
 import {
   calculateDeliveryFeeKotlin,
   calculateDeliveryFeePython,
+  calculateDeliveryFeeTypeScript,
 } from '@/utils/api'
 import styles from './page.module.css'
 
@@ -36,6 +37,10 @@ const CalculatorForm = () => {
   const [deliveryTimeOption, setDeliveryTimeOption] =
     useState<DeliveryTimeOption>(DeliveryTimeOption.Now)
 
+  // State for the sliding radio button
+  const [codeLanguage, setCodeLanguage] =
+    useState<CodeLanguage>(CodeLanguage.TypeScript)
+
   // State for the selection fields, only relevant if 'later' is selected
   const [selectedDay, setSelectedDay] = useState<Weekday>(Weekday.Today)
   const [selectedTime, setSelectedTime] = useState('00:00')
@@ -56,6 +61,8 @@ const CalculatorForm = () => {
   const handleNumberOfItemsChange = (value: string) => setNumberOfItems(value)
   const handleDeliveryTimeOptionToggle = (option: string) =>
     setDeliveryTimeOption(option as DeliveryTimeOption)
+  const handleCodeLanguageOptionToggle = (option: string) =>
+    setCodeLanguage(option as CodeLanguage)
   const handleDaySelect = (day: string) => setSelectedDay(day as Weekday)
   const handleTimeSelect = (time: string) => setSelectedTime(time)
 
@@ -106,7 +113,26 @@ const CalculatorForm = () => {
     }
 
     try {
-      const result = await calculateDeliveryFeePython(requestData)
+      let result;
+      switch (codeLanguage) {
+        case CodeLanguage.Python:
+          result = await calculateDeliveryFeePython(requestData);
+          break;
+        case CodeLanguage.TypeScript:
+          result = await calculateDeliveryFeeTypeScript(requestData);
+          break;
+        case CodeLanguage.Kotlin:
+          result = await calculateDeliveryFeeKotlin(requestData);
+          break;
+        default:
+          throw new Error(`Unsupported code language: ${codeLanguage}`);
+      }
+
+      // Check if deliveryFee exists in the result
+      if (result?.deliveryFee === undefined) {
+        throw new Error(`The delivery fee could not be calculated for ${codeLanguage}.`);
+      }
+
       let deliveryFeeInEuros = (result.deliveryFee / 100).toFixed(2)
       setDeliveryFee(deliveryFeeInEuros)
     } catch (err) {
@@ -156,6 +182,16 @@ const CalculatorForm = () => {
           onToggle={handleDeliveryTimeOptionToggle}
           selected={deliveryTimeOption}
           dataTestId='deliveryTimeOption'
+        />
+        <SlidingRadioButton
+          choices={[
+            CodeLanguage.TypeScript.valueOf(),
+            CodeLanguage.Python.valueOf(),
+            CodeLanguage.Kotlin.valueOf(),
+          ]}
+          onToggle={handleCodeLanguageOptionToggle}
+          selected={codeLanguage}
+          dataTestId='codeLanguageOption'
         />
         {deliveryTimeOption === 'later' && (
           <div className={styles.selectionFieldsContainer}>

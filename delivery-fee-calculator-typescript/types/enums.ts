@@ -14,3 +14,9 @@ export enum DeliveryTimeOption {
   Now = 'now',
   Later = 'later',
 }
+
+export enum CodeLanguage {
+  TypeScript = 'TypeScript',
+  Python = 'Python',
+  Kotlin = 'Kotlin',
+}

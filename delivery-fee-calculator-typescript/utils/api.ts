@@ -28,3 +28,17 @@ export const calculateDeliveryFeePython = async (data: DeliveryFeeRequestData): 
 
   return response.json();
 };
+
+export const calculateDeliveryFeeTypeScript = async (data: DeliveryFeeRequestData): Promise<DeliveryFeeResponseData> => {
+  const response = await fetch('http://localhost:3000/api/deliveryFee', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Error: ${response.status}`);
+  }
+
+  return response.json();
+};

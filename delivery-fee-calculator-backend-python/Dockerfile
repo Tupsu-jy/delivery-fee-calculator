@@ -1,0 +1,23 @@
+# Use the official Python image as a base
+FROM python:3.10-slim
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Install pipenv
+RUN pip install --no-cache-dir pipenv
+
+# Copy Pipfile and Pipfile.lock
+COPY Pipfile Pipfile.lock ./
+
+# Install dependencies using pipenv
+RUN pipenv install --system --deploy
+
+# Copy the application code to the container
+COPY . .
+
+# Expose the port uvicorn will run on
+EXPOSE 8000
+
+# Command to run the application
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

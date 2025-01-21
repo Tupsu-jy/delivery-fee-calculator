@@ -1,9 +1,13 @@
-FROM openjdk:17
+FROM openjdk:17-alpine
 
-# Set the working directory in the container
+# Set the working directory
 WORKDIR /app
 
-# Copy the Gradle wrapper, build files, and source code to the container
+# Install necessary tools
+RUN apk add --no-cache findutils bash
+
+# Copy files and build the application
+COPY gradle.properties ./
 COPY gradlew ./
 COPY gradle gradle
 COPY build.gradle.kts ./
@@ -13,8 +17,11 @@ COPY src src
 # Grant execution permissions to the Gradle wrapper
 RUN chmod +x ./gradlew
 
-# Expose port 8080 for the application
+# Build the application
+RUN ./gradlew build --no-daemon
+
+# Expose the application port
 EXPOSE 8080
 
-# Use the Gradle wrapper to run the application
-CMD ["./gradlew", "run"]
+# Run the application
+CMD ["java", "-jar", "build/libs/delivery-fee-calculator-backend-kotlin-all.jar"]
