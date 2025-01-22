@@ -22,9 +22,9 @@ test_data = load_test_data()
 )
 def test_calculate_fee_endpoint(cart_value, delivery_distance, number_of_items, time, expected_fee):
     request_data = {
-        "cart_value": cart_value,
-        "delivery_distance": delivery_distance,
-        "number_of_items": number_of_items,
+        "cartValue": cart_value,
+        "deliveryDistance": delivery_distance,
+        "numberOfItems": number_of_items,
         "time": time
     }
 
@@ -34,4 +34,4 @@ def test_calculate_fee_endpoint(cart_value, delivery_distance, number_of_items, 
     # Assert the response
     assert response.status_code == 200
     response_data = response.json()
-    assert response_data['delivery_fee'] == expected_fee
+    assert response_data['deliveryFee'] == expected_fee

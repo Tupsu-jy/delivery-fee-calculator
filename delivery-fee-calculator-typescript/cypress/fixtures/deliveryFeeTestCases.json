@@ -13,7 +13,7 @@
     "cartValue": "15.00",
     "deliveryDistance": "1500",
     "amountOfItems": "2",
-    "deliveryTimeOption": "Express",
+    "deliveryTimeOption": "Now",
     "selectedDay": "Friday",
     "expectedFee": "10.00 €"
   }

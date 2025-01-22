@@ -13,14 +13,8 @@ def load_test_data():
         # Get the current directory of the pytest file
         current_dir = os.path.dirname(os.path.abspath(__file__))
 
-        # Navigate up to the parent directory
-        parent_dir = os.path.dirname(current_dir)
-
-        # Navigate up again
-        project_parent_dir = os.path.dirname(parent_dir)
-
         # Specify path to the JSON file
-        json_file_path = os.path.join(project_parent_dir, 'test_data.json')
+        json_file_path = os.path.join(current_dir, 'test_data.json')
 
         # Load the test data from the JSON file
         with open(json_file_path) as f:

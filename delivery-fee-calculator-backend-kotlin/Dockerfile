@@ -4,18 +4,20 @@ FROM openjdk:17-alpine
 WORKDIR /app
 
 # Install necessary tools
-RUN apk add --no-cache findutils bash
+RUN apk add --no-cache bash inotify-tools
 
-# Copy files and build the application
+# Copy Gradle configuration files
 COPY gradle.properties ./
 COPY gradlew ./
 COPY gradle gradle
 COPY build.gradle.kts ./
 COPY settings.gradle.kts ./
-COPY src src
 
-# Grant execution permissions to the Gradle wrapper
+# Grant execution permissions to Gradle wrapper
 RUN chmod +x ./gradlew
+
+# Copy source code
+COPY src src
 
 # Build the application
 RUN ./gradlew build --no-daemon
@@ -23,5 +25,5 @@ RUN ./gradlew build --no-daemon
 # Expose the application port
 EXPOSE 8080
 
-# Run the application
+# Run the built JAR file
 CMD ["java", "-jar", "build/libs/delivery-fee-calculator-backend-kotlin-all.jar"]
